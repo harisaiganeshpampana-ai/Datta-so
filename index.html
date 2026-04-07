@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to PPT - Instant Study Slides</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-graduation-cap"></i> Instant Study Slides</h1>
+            <p>Convert PDFs to PPTs in <span class="highlight">2 seconds</span>!</p>
+        </header>
+
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag & drop your PDF or click to browse</p>
+                <input type="file" id="pdfInput" accept=".pdf" hidden>
+            </div>
+            <button id="processBtn" class="process-btn" disabled>
+                <i class="fas fa-magic"></i> Generate PPT
+            </button>
+        </div>
+
+        <div class="quick-links">
+            <h3><i class="fas fa-book"></i> Quick PDF Sources</h3>
+            <div class="sources-grid">
+                {% for name, url in sources.items() %}
+                <a href="{{ url }}" class="source-card" target="_blank">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>{{ name }}</span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="progress" class="progress-bar" style="display: none;">
+            <div class="progress-fill"></div>
+            <span class="progress-text">Processing...</span>
+        </div>
+
+        <div id="result" class="result-section" style="display: none;">
+            <h3><i class="fas fa-check-circle"></i> PPT Generated!</h3>
+            <p id="timeTaken"></p>
+            <a id="downloadLink" class="download-btn" href="#" download>
+                <i class="fas fa-download"></i> Download PPT
+            </a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
